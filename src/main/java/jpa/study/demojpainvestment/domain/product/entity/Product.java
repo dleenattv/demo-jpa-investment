@@ -36,4 +36,20 @@ public class Product {
 
     public Product() {
     }
+
+    public Product(String productName, Long amountOfTotalMoney) {
+        this.productName = productName;
+        this.amountOfTotalMoney = amountOfTotalMoney;
+        this.isOnSale = false;
+        setStartedAt();
+        setEndedAt();
+    }
+
+    public void setStartedAt() {
+        this.startedAt = LocalDateTime.now();
+    }
+
+    public void setEndedAt() {
+        this.endedAt = startedAt.plusDays(7);
+    }
 }
