@@ -5,6 +5,8 @@ import jpa.study.demojpainvestment.domain.product.entity.Product;
 import jpa.study.demojpainvestment.domain.product.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService {
 
@@ -23,5 +25,9 @@ public class ProductService {
     private Product getProductBy(ProductCreateDto productCreateDto) {
         return new Product(productCreateDto.getProductName(),
                             productCreateDto.getAmountOfTotalMoney());
+    }
+
+    public List<Product> findAllProducts() {
+        return productRepository.findAll();
     }
 }
