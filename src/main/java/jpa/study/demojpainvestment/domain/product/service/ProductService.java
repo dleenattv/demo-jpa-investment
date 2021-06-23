@@ -1,6 +1,7 @@
 package jpa.study.demojpainvestment.domain.product.service;
 
 import jpa.study.demojpainvestment.api.dto.ProductCreateDto;
+import jpa.study.demojpainvestment.domain.investment.service.InvestmentService;
 import jpa.study.demojpainvestment.domain.product.entity.Product;
 import jpa.study.demojpainvestment.domain.product.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -11,9 +12,11 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final InvestmentService investmentService;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, InvestmentService investmentService) {
         this.productRepository = productRepository;
+        this.investmentService = investmentService;
     }
 
     public Product createProduct(ProductCreateDto productCreateDto) {
