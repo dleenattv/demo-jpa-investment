@@ -30,4 +30,12 @@ public class ProductService {
     public List<Product> findAllProducts() {
         return productRepository.findAll();
     }
+
+    public List<Product> findProductsAreOnSale() {
+        return productRepository.findProductsByIsOnSale(true);
+    }
+
+    public List<Product> findProductsAreNotOnSale() {
+        return productRepository.findProductsByIsOnSale(false);
+    }
 }
