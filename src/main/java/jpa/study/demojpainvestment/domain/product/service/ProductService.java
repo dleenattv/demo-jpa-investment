@@ -54,4 +54,8 @@ public class ProductService {
     public void addCurrentMoney(Product product, InvestmentCreateDto investmentCreateDto) {
         product.setCurrentMoney(investmentCreateDto.getAmountOfMoney());
     }
+
+    public List<Product> findMyProductsBy(String investorId) throws Throwable {
+        return investmentService.findMyProductsBy(investorId);
+    }
 }
