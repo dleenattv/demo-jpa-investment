@@ -31,14 +31,6 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public List<Product> findProductsAreOnSale() {
-        return productRepository.findProductsByIsOnSale(true);
-    }
-
-    public List<Product> findProductsAreNotOnSale() {
-        return productRepository.findProductsByIsOnSale(false);
-    }
-
     public Product getProductById(Long productId) throws Throwable {
         Product product = productRepository.findProductByProductId(productId);
         return product.getOnSaleProduct(product);
@@ -46,5 +38,9 @@ public class ProductService {
 
     public void addCurrentMoney(Product product, InvestmentCreateDto investmentCreateDto) {
         product.setCurrentMoney(investmentCreateDto.getAmountOfMoney());
+    }
+
+    public List<Product> findProductsAreOnSale(Boolean param) {
+        return productRepository.findProductsByIsOnSale(param);
     }
 }
