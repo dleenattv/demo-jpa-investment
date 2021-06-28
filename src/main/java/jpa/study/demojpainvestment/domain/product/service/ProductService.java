@@ -1,5 +1,6 @@
 package jpa.study.demojpainvestment.domain.product.service;
 
+import jpa.study.demojpainvestment.api.dto.InvestmentCreateDto;
 import jpa.study.demojpainvestment.api.dto.ProductCreateDto;
 import jpa.study.demojpainvestment.domain.investment.service.InvestmentService;
 import jpa.study.demojpainvestment.domain.product.entity.Product;
@@ -40,5 +41,17 @@ public class ProductService {
 
     public List<Product> findProductsAreNotOnSale() {
         return productRepository.findProductsByIsOnSale(false);
+    }
+
+    public Product getProductById(Long productId) throws Throwable {
+        Product product = (Product) productRepository
+                        .findProductByProductId(productId)
+                        .orElseThrow(() -> new Exception("Product does not exist"));
+
+        return product.getOnSaleProduct(product);
+    }
+
+    public void addCurrentMoney(Product product, InvestmentCreateDto investmentCreateDto) {
+        product.setCurrentMoney(investmentCreateDto.getAmountOfMoney());
     }
 }
