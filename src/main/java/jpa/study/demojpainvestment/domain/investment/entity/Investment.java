@@ -1,5 +1,6 @@
 package jpa.study.demojpainvestment.domain.investment.entity;
 
+import jpa.study.demojpainvestment.api.dto.InvestmentCreateDto;
 import jpa.study.demojpainvestment.domain.investor.entity.Investor;
 import jpa.study.demojpainvestment.domain.product.entity.Product;
 
@@ -28,5 +29,16 @@ public class Investment {
     private LocalDateTime investedAt;
 
     public Investment() {
+    }
+
+    public Investment(Product product, Investor investor, Long amountOfMoney) {
+        this.product = product;
+        this.investor = investor;
+        this.amountOfMoney = amountOfMoney;
+        this.investedAt = LocalDateTime.now();
+    }
+
+    public Investment getInvestment(Product product, Investor investor, InvestmentCreateDto investmentCreateDto) {
+        return new Investment(product, investor, investmentCreateDto.getAmountOfMoney());
     }
 }
