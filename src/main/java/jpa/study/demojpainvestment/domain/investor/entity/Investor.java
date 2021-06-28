@@ -1,5 +1,6 @@
 package jpa.study.demojpainvestment.domain.investor.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jpa.study.demojpainvestment.domain.investment.entity.Investment;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class Investor {
     private String investorId;
 
     @OneToMany(mappedBy = "investor")
+    @JsonManagedReference
     private Set<Investment> investments;
 
     public Investor() {
