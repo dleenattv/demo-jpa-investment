@@ -16,10 +16,14 @@ public class Investor {
     @Column
     private String investorId;
 
-    @OneToMany(mappedBy = "investor")
+    @OneToMany(mappedBy = "investor", fetch = FetchType.EAGER)
     @JsonManagedReference
     private Set<Investment> investments;
 
     public Investor() {
+    }
+
+    public Set<Investment> getInvestments() {
+        return this.investments;
     }
 }
