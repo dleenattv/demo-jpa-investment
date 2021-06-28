@@ -27,4 +27,9 @@ public class ProductController {
     public List<Product> findAllProducts() {
         return productService.findAllProducts();
     }
+
+    @GetMapping("/products/is-on-sale/true")
+    public List<Product> findProductsAreOnSale() {
+        return productService.findProductsAreOnSale();
+    }
 }
