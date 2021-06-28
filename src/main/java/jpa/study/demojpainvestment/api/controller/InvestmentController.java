@@ -23,7 +23,7 @@ public class InvestmentController {
     }
 
     @GetMapping("/products/{investorId}")
-    public List<Product> findMyProducts(@PathVariable String investorId) throws Throwable {
+    public List<Product> findMyProducts(@PathVariable String investorId) {
         return investmentService.findMyProductsBy(investorId);
     }
 }
