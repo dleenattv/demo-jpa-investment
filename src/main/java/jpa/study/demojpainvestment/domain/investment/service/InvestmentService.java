@@ -26,39 +26,25 @@ public class InvestmentService {
     }
 
     public Investment investProduct(InvestmentCreateDto investmentCreateDto) throws Throwable {
-        Investment investment = new Investment();
         Product product = findProductById(investmentCreateDto);
         Investor investor = findInvestorById(investmentCreateDto);
-        if (checkMoney(investmentCreateDto, product)) {
-            investment = investment.getInvestment(product, investor, investmentCreateDto);
-        } else {
-            throw new Exception("Invest failed.");
-        }
-        addMoneyToProduct(product, investmentCreateDto);
+
+        product.addMoneyBy(investmentCreateDto);
+
+        Investment investment = new Investment(product, investor, investmentCreateDto.getAmountOfMoney());
+
         return investmentRepository.save(investment);
     }
 
-    private void addMoneyToProduct(Product product, InvestmentCreateDto investmentCreateDto) {
-        productService.addCurrentMoney(product, investmentCreateDto);
-    }
-
-    private Investor findInvestorById(InvestmentCreateDto investmentCreateDto) throws Throwable {
+    private Investor findInvestorById(InvestmentCreateDto investmentCreateDto) {
         return investorService.findInvestorById(investmentCreateDto.getInvestorId());
     }
 
-    private Boolean checkMoney(InvestmentCreateDto investmentCreateDto, Product product) throws Throwable {
-        if (product.getBalance() >= investmentCreateDto.getAmountOfMoney()) {
-            return true;
-        } else {
-            throw new Exception("The investment must be less than the balance.");
-        }
-    }
-
-    private Product findProductById(InvestmentCreateDto investmentCreateDto) throws Throwable {
+    private Product findProductById(InvestmentCreateDto investmentCreateDto) {
         return productService.getProductById(investmentCreateDto.getProductId());
     }
 
-    public List<Product> findMyProductsBy(String investorId) throws Throwable {
+    public List<Product> findMyProductsBy(String investorId) {
         Investor investor = investorService.findInvestorById(investorId);
         List<Investment> investments = investmentRepository.findInvestmentsByInvestor(investor);
         List<Product> products = new ArrayList<>();
