@@ -4,6 +4,8 @@ import jpa.study.demojpainvestment.domain.investor.entity.Investor;
 import jpa.study.demojpainvestment.domain.investor.repository.InvestorRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+
 @Service
 public class InvestorService {
 
@@ -14,6 +16,8 @@ public class InvestorService {
     }
 
     public Investor findInvestorById(String investorId) {
-        return investorRepository.findInvestorByInvestorId(investorId);
+        return investorRepository
+                .findInvestorByInvestorId(investorId)
+                .orElseThrow(EntityNotFoundException::new);
     }
 }
