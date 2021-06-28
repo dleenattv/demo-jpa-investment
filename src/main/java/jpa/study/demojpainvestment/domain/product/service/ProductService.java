@@ -6,6 +6,7 @@ import jpa.study.demojpainvestment.domain.product.entity.Product;
 import jpa.study.demojpainvestment.domain.product.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -31,13 +32,10 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product getProductById(Long productId) throws Throwable {
-        Product product = productRepository.findProductByProductId(productId);
-        return product.getOnSaleProduct(product);
-    }
-
-    public void addCurrentMoney(Product product, InvestmentCreateDto investmentCreateDto) {
-        product.setCurrentMoney(investmentCreateDto.getAmountOfMoney());
+    public Product getProductById(Long productId) {
+        return productRepository
+                .findProductByProductIdAndIsOnSale(productId, Boolean.TRUE)
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     public List<Product> findProductsAreOnSale(Boolean param) {
