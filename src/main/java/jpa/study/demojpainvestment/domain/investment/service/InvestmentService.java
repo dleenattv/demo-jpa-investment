@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class InvestmentService {
@@ -46,11 +47,13 @@ public class InvestmentService {
 
     public List<Product> findMyProductsBy(String investorId) {
         Investor investor = investorService.findInvestorById(investorId);
-        List<Investment> investments = investmentRepository.findInvestmentsByInvestor(investor);
+        Set<Investment> investments = investor.getInvestments();
+
         List<Product> products = new ArrayList<>();
         for (Investment investment : investments) {
             products.add(investment.getProduct());
         }
+
         return products;
     }
 }
