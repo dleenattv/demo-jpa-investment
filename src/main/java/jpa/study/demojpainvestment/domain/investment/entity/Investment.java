@@ -41,10 +41,6 @@ public class Investment {
         this.investedAt = ZonedDateTime.now();
     }
 
-    public Investment getInvestment(Product product, Investor investor, InvestmentCreateDto investmentCreateDto) {
-        return new Investment(product, investor, investmentCreateDto.getAmountOfMoney());
-    }
-
     public Product getProduct() {
         return product;
     }
