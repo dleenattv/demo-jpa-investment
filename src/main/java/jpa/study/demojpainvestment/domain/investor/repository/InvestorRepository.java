@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface InvestorRepository extends JpaRepository<Investor, Long> {
 
-    Investor findInvestorByInvestorId(String investorId);
+    Optional<Investor> findInvestorByInvestorId(String investorId);
 
 }
