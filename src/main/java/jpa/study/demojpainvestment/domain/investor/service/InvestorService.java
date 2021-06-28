@@ -13,7 +13,7 @@ public class InvestorService {
         this.investorRepository = investorRepository;
     }
 
-    public Investor findInvestorById(String investorId) throws Throwable {
-        return (Investor) investorRepository.findInvestorByInvestorId(investorId).orElseThrow(()-> new Exception(investorId + " is not a member."));
+    public Investor findInvestorById(String investorId) {
+        return investorRepository.findInvestorByInvestorId(investorId);
     }
 }
