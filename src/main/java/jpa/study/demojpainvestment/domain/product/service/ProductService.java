@@ -24,8 +24,7 @@ public class ProductService {
     }
 
     private Product getProductBy(ProductCreateDto productCreateDto) {
-        return new Product(productCreateDto.getProductName(),
-                            productCreateDto.getAmountOfTotalMoney());
+        return new Product(productCreateDto);
     }
 
     public List<Product> findAllProducts() {
