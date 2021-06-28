@@ -9,6 +9,9 @@ import jpa.study.demojpainvestment.domain.product.entity.Product;
 import jpa.study.demojpainvestment.domain.product.service.ProductService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class InvestmentService {
 
@@ -53,5 +56,15 @@ public class InvestmentService {
 
     private Product findProductById(InvestmentCreateDto investmentCreateDto) throws Throwable {
         return productService.getProductById(investmentCreateDto.getProductId());
+    }
+
+    public List<Product> findMyProductsBy(String investorId) throws Throwable {
+        Investor investor = investorService.findInvestorById(investorId);
+        List<Investment> investments = investmentRepository.findInvestmentsByInvestor(investor);
+        List<Product> products = new ArrayList<>();
+        for (Investment investment : investments) {
+            products.add(investment.getProduct());
+        }
+        return products;
     }
 }
