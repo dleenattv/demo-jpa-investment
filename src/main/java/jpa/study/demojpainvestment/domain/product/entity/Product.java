@@ -52,4 +52,24 @@ public class Product {
     public void setEndedAt() {
         this.endedAt = startedAt.plusDays(7);
     }
+
+    public Boolean getSaleStatement() {
+        return isOnSale;
+    }
+
+    public Product getOnSaleProduct(Product product) throws Exception {
+        if (product.getSaleStatement()) {
+            return product;
+        } else {
+            throw new Exception("This product is not on sale.");
+        }
+    }
+
+    public Long getBalance() {
+        return amountOfTotalMoney - amountOfCurrentMoney;
+    }
+
+    public void setCurrentMoney(Long money) {
+        amountOfCurrentMoney = amountOfCurrentMoney + money;
+    }
 }
