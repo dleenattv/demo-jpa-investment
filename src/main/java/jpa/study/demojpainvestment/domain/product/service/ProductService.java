@@ -2,7 +2,6 @@ package jpa.study.demojpainvestment.domain.product.service;
 
 import jpa.study.demojpainvestment.api.dto.InvestmentCreateDto;
 import jpa.study.demojpainvestment.api.dto.ProductCreateDto;
-import jpa.study.demojpainvestment.domain.investment.service.InvestmentService;
 import jpa.study.demojpainvestment.domain.product.entity.Product;
 import jpa.study.demojpainvestment.domain.product.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -13,11 +12,9 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
-    private final InvestmentService investmentService;
 
-    public ProductService(ProductRepository productRepository, InvestmentService investmentService) {
+    public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
-        this.investmentService = investmentService;
     }
 
     public Product createProduct(ProductCreateDto productCreateDto) {
@@ -44,18 +41,11 @@ public class ProductService {
     }
 
     public Product getProductById(Long productId) throws Throwable {
-        Product product = (Product) productRepository
-                        .findProductByProductId(productId)
-                        .orElseThrow(() -> new Exception("Product does not exist"));
-
+        Product product = productRepository.findProductByProductId(productId);
         return product.getOnSaleProduct(product);
     }
 
     public void addCurrentMoney(Product product, InvestmentCreateDto investmentCreateDto) {
         product.setCurrentMoney(investmentCreateDto.getAmountOfMoney());
-    }
-
-    public List<Product> findMyProductsBy(String investorId) throws Throwable {
-        return investmentService.findMyProductsBy(investorId);
     }
 }
