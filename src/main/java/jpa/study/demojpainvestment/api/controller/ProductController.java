@@ -32,4 +32,9 @@ public class ProductController {
     public List<Product> findProductsAreOnSale() {
         return productService.findProductsAreOnSale();
     }
+
+    @GetMapping("/products/is-on-sale/false")
+    public List<Product> findProductsAreNotOnSale() {
+        return productService.findProductsAreNotOnSale();
+    }
 }
