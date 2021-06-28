@@ -1,6 +1,7 @@
 package jpa.study.demojpainvestment.domain.product.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jpa.study.demojpainvestment.api.dto.ProductCreateDto;
 import jpa.study.demojpainvestment.domain.investment.entity.Investment;
 
 import javax.persistence.*;
@@ -39,21 +40,13 @@ public class Product {
     public Product() {
     }
 
-    public Product(String productName, Long amountOfTotalMoney) {
-        this.productName = productName;
-        this.amountOfTotalMoney = amountOfTotalMoney;
+    public Product(ProductCreateDto productCreateDto) {
+        this.productName = productCreateDto.getProductName();
+        this.amountOfTotalMoney = productCreateDto.getAmountOfTotalMoney();
         this.amountOfCurrentMoney = 0L;
         this.isOnSale = false;
-        setStartedAt();
-        setEndedAt();
-    }
-
-    public void setStartedAt() {
         this.startedAt = ZonedDateTime.now();
-    }
-
-    public void setEndedAt() {
-        this.endedAt = startedAt.plusDays(7);
+        this.endedAt = this.startedAt.plusDays(7);
     }
 
     public Boolean getSaleStatement() {
