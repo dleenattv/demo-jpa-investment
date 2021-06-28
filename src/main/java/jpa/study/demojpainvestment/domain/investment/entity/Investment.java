@@ -41,4 +41,8 @@ public class Investment {
     public Investment getInvestment(Product product, Investor investor, InvestmentCreateDto investmentCreateDto) {
         return new Investment(product, investor, investmentCreateDto.getAmountOfMoney());
     }
+
+    public Product getProduct() {
+        return product;
+    }
 }
