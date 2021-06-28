@@ -49,12 +49,8 @@ public class Product {
         this.endedAt = this.startedAt.plusDays(7);
     }
 
-    public Boolean getSaleStatement() {
-        return isOnSale;
-    }
-
     public Product getOnSaleProduct(Product product) throws Exception {
-        if (product.getSaleStatement()) {
+        if (product.getOnSale()) {
             return product;
         } else {
             throw new Exception("This product is not on sale.");
