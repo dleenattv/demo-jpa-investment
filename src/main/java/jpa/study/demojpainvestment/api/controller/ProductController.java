@@ -27,13 +27,8 @@ public class ProductController {
         return productService.findAllProducts();
     }
 
-    @GetMapping("/products/is-on-sale/true")
-    public List<Product> findProductsAreOnSale() {
-        return productService.findProductsAreOnSale();
-    }
-
-    @GetMapping("/products/is-on-sale/false")
-    public List<Product> findProductsAreNotOnSale() {
-        return productService.findProductsAreNotOnSale();
+    @GetMapping("/products/is-on-sale/{param}")
+    public List<Product> findProductsAreOnSale(@PathVariable Boolean param) {
+        return productService.findProductsAreOnSale(param);
     }
 }
