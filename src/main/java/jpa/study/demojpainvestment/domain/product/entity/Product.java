@@ -1,6 +1,7 @@
 package jpa.study.demojpainvestment.domain.product.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jpa.study.demojpainvestment.api.dto.InvestmentCreateDto;
 import jpa.study.demojpainvestment.api.dto.ProductCreateDto;
 import jpa.study.demojpainvestment.domain.investment.entity.Investment;
 
@@ -44,7 +45,7 @@ public class Product {
         this.productName = productCreateDto.getProductName();
         this.amountOfTotalMoney = productCreateDto.getAmountOfTotalMoney();
         this.amountOfCurrentMoney = 0L;
-        this.isOnSale = false;
+        this.isOnSale = true;
         this.startedAt = ZonedDateTime.now();
         this.endedAt = this.startedAt.plusDays(7);
     }
@@ -91,5 +92,22 @@ public class Product {
 
     public ZonedDateTime getEndedAt() {
         return endedAt;
+    }
+
+    public void addMoneyBy(InvestmentCreateDto investmentCreateDto) throws Exception {
+        Long investingMoney = investmentCreateDto.getAmountOfMoney();
+        if (this.getBalance() < investingMoney) {
+            throw new Exception("The investment must be less than the balance.");
+        }
+
+        setCurrentMoney(investingMoney);
+
+        updateIsOnSale();
+    }
+
+    private void updateIsOnSale() {
+        if (this.getBalance() == 0) {
+            this.isOnSale = false;
+        }
     }
 }
