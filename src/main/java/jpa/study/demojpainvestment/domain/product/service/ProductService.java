@@ -1,6 +1,5 @@
 package jpa.study.demojpainvestment.domain.product.service;
 
-import jpa.study.demojpainvestment.api.dto.InvestmentCreateDto;
 import jpa.study.demojpainvestment.api.dto.ProductCreateDto;
 import jpa.study.demojpainvestment.domain.product.entity.Product;
 import jpa.study.demojpainvestment.domain.product.repository.ProductRepository;
