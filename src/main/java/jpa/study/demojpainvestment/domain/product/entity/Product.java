@@ -50,14 +50,6 @@ public class Product {
         this.endedAt = this.startedAt.plusDays(7);
     }
 
-    public Product getOnSaleProduct(Product product) throws Exception {
-        if (product.getOnSale()) {
-            return product;
-        } else {
-            throw new Exception("This product is not on sale.");
-        }
-    }
-
     public Long getBalance() {
         return amountOfTotalMoney - amountOfCurrentMoney;
     }
