@@ -4,10 +4,7 @@ import jpa.study.demojpainvestment.api.dto.InvestmentCreateDto;
 import jpa.study.demojpainvestment.domain.investment.entity.Investment;
 import jpa.study.demojpainvestment.domain.investment.service.InvestmentService;
 import jpa.study.demojpainvestment.domain.product.entity.Product;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +18,7 @@ public class InvestmentController {
     }
 
     @PostMapping("/investments")
-    public Investment investProduct(InvestmentCreateDto investmentCreateDto) throws Throwable {
+    public Investment investProduct(@RequestBody InvestmentCreateDto investmentCreateDto) throws Throwable {
         return investmentService.investProduct(investmentCreateDto);
     }
 
